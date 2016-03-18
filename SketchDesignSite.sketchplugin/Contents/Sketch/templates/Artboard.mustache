@@ -1,17 +1,7 @@
-{{# artboards }}
-<section class="artboard" id="{{ id }}">
-  {{# title.length }}
-  <header>
-    <h{{titlelevel}}>{{ title }}</h{{titlelevel}}>
-  </header>
-  {{/ title.length }}
-  <section class="image">
-    <img src="{{ image }}" class="retina-image guide-image">
-  </section>
-  {{# text.length }}
-  <section class="content">
-    {{{ text }}}
-  </section>
-  {{/ text.length }}
-</section>
+{{# artboards }}  - id: {{ id }}
+    title: {{ title }}
+    text: {{{ text }}}
+    versions: 
+{{ versions }}
+    image: {{ image}}
 {{/ artboards }}

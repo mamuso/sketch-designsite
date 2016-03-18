@@ -87,6 +87,16 @@ com.mamuso.tools = {
     return html;
   },
 
+  cleanFolder: function(dirToEmpty) {
+    var manager = [NSFileManager defaultManager];
+    var error = null;
+    files = manager.contentsOfDirectoryAtPath_error(dirToEmpty, error);
+    for(i=0; i<files.count(); i++) {
+      file = files[i];
+      [manager removeItemAtPath:[dirToEmpty stringByAppendingPathComponent:file] error:error];
+    }    
+  },
+
   // -------------------------------------------------------------------
   // Exec, from https://github.com/mathieudutour/git-sketch-plugin/blob/master/Git.sketchplugin/Contents/Sketch/shared.cocoascript
   // -------------------------------------------------------------------
@@ -112,12 +122,39 @@ com.mamuso.tools = {
   },
 
   // -------------------------------------------------------------------
-  // Text to Markdown
+  // Pulling
   // -------------------------------------------------------------------
   gitPull: function() {
     var command = NSString.stringWithFormat_("\\cd \"%@\" && \\git pull", com.mamuso.config.dropboxConfigPath);
     var stdout = com.mamuso.tools.exec(command);
     log(stdout);
+  },
+
+
+  // -------------------------------------------------------------------
+  // Commit and Push
+  // -------------------------------------------------------------------
+  gitPush: function() {
+    var command = NSString.stringWithFormat_("\\cd \"%@\" && \\git add * && \\git commit -m 'Commit from the plugin' && \\git push", com.mamuso.config.dropboxConfigPath);
+    var stdout = com.mamuso.tools.exec(command);
+    log(stdout);
+  },
+
+
+  // -------------------------------------------------------------------
+  // Get the hash history of the file
+  // -------------------------------------------------------------------
+  gitLogHash: function(file) {
+    var versions = []
+    var command = NSString.stringWithFormat_("\\cd \"%@\" && \\git log --pretty=format:\'%%H\' \"%@\"", com.mamuso.config.dropboxConfigPath, file);
+    var stdout = com.mamuso.tools.exec(command);
+    var revisions = stdout.componentsSeparatedByString(@"\n");
+    var filePath = file.stringByReplacingOccurrencesOfString_withString(com.mamuso.config.dropboxConfigPath, "")
+
+    for(i=0; i<revisions.count(); i++) {
+      versions.push("      - " + com.mamuso.config.previewPath +  revisions[i] + filePath + "\n");
+    }    
+    return versions;
   },
 
 };
