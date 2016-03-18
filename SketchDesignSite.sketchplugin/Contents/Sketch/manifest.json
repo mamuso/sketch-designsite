@@ -1,0 +1,23 @@
+{
+  "author" : "Manuel Muñoz Solera",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "handler" : "onRun",
+      "shortcut" : "",
+      "name" : "🎟 Export to design site",
+      "identifier" : "sketch-designsite"
+    },
+  ],
+  "menu": {
+    "isRoot": true,
+    "items": [
+      "sketch-designsite",
+    ],
+  },
+  "identifier" : "com.mamuso.sketch.designsite",
+  "version" : "0.0.1",
+  "description" : "Export content to the design site",
+  "authorEmail" : "mamuso@mamuso.net",
+  "name" : "🎟 Export to design site"
+}

@@ -1,0 +1,19 @@
+<nav role="navigation" id="main-nav">
+  {{# logo.length }}
+    <a href="index.html" class="logo"><img src="assets/logo.png"></a>
+  {{/ logo.length }}
+  <ul>
+    {{# menu }}
+      <li id="{{ id }}">
+        <a href="{{ url }}">{{ name }}</a>
+        <ol>
+          {{# artboards }}
+            <li>
+              <a href="{{ url }}" class="{{classname}}">{{ name }}</a>
+            </li>
+          {{/ artboards }}
+        </ol>
+      </li>
+    {{/ menu }}
+  </ul>
+</nav>
