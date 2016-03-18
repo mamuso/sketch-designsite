@@ -45,16 +45,23 @@ com.mamuso.tools = {
   // Let the user specify a directory
   // -------------------------------------------------------------------
   getDirFromPrompt: function() {
-    var panel = [NSOpenPanel openPanel];
-    [panel setMessage:"🎟 Where do you want to export the documents?"];
-    [panel setCanChooseDirectories: true];
-    [panel setCanChooseFiles: false];
-    [panel setCanCreateDirectories: true];
-    var defaultDir = com.mamuso.config.doc.fileURL().URLByDeletingLastPathComponent();
-    [panel setDirectoryURL:defaultDir];
-    if ([panel runModal] == NSOKButton) {
-      var message = [panel filename];
-      return message;
+    // We need to check if we have access to the dropbox design site folder
+    var dropboxConfig = JSON.parse(NSString.stringWithContentsOfFile(NSHomeDirectory().stringByAppendingPathComponent('.dropbox/info.json')));
+    if(dropboxConfig.business.path && dropboxConfig.business.is_team == 1){
+      com.mamuso.config.dropboxConfigPath = NSString.stringWithFormat("%@", dropboxConfig.business.path).stringByAppendingPathComponent(com.mamuso.config.dropboxPath);
+      com.mamuso.config.dropboxProjectsPath = NSURL.fileURLWithPath(NSString.stringWithFormat("%@", dropboxConfig.business.path).stringByAppendingPathComponent(com.mamuso.config.dropboxPath).stringByAppendingPathComponent("Projects"));
+      var panel = [NSOpenPanel openPanel];
+      [panel setMessage:"🎟 Choose an existing project or create a new folder"];
+      [panel setCanChooseDirectories: true];
+      [panel setCanChooseFiles: false];
+      [panel setCanCreateDirectories: true];
+      [panel setDirectoryURL:com.mamuso.config.dropboxProjectsPath];
+      if ([panel runModal] == NSOKButton) {
+        var message = [panel filename];
+        return message;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
@@ -78,5 +85,39 @@ com.mamuso.tools = {
   markdownToHTML: function(text) {
     var html = [MMMarkdown HTMLStringWithMarkdown:text error:null];
     return html;
-  }
+  },
+
+  // -------------------------------------------------------------------
+  // Exec, from https://github.com/mathieudutour/git-sketch-plugin/blob/master/Git.sketchplugin/Contents/Sketch/shared.cocoascript
+  // -------------------------------------------------------------------
+  exec: function(command) {
+    var task = NSTask.alloc().init();
+    var pipe = NSPipe.pipe();
+    var errPipe = NSPipe.pipe();
+
+    task.setLaunchPath_(@"/bin/bash");
+    task.setArguments_(NSArray.arrayWithObjects_("-c", command, nil));
+    task.setStandardOutput_(pipe);
+    task.setStandardError_(errPipe);
+    task.launch();
+
+    var data = errPipe.fileHandleForReading().readDataToEndOfFile();
+    if (data != nil && data.length())
+    {
+      var message = NSString.alloc().initWithData_encoding_(data, NSUTF8StringEncoding);
+      return NSException.raise_format_("failed", message);
+    }
+    data = pipe.fileHandleForReading().readDataToEndOfFile();
+    return NSString.alloc().initWithData_encoding_(data, NSUTF8StringEncoding);
+  },
+
+  // -------------------------------------------------------------------
+  // Text to Markdown
+  // -------------------------------------------------------------------
+  gitPull: function() {
+    var command = NSString.stringWithFormat_("\\cd \"%@\" && \\git pull", com.mamuso.config.dropboxConfigPath);
+    var stdout = com.mamuso.tools.exec(command);
+    log(stdout);
+  },
+
 };

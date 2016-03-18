@@ -24,14 +24,10 @@ var onRun = function(context) {
       if (com.mamuso.config.basePath == null) {
         return;
       } else {
-        com.mamuso.config.basePath = com.mamuso.config.basePath.stringByAppendingPathComponent(com.mamuso.config.guidePath);
         com.mamuso.config.templatePath = scriptPath.stringByDeletingLastPathComponent().stringByAppendingPathComponent("templates"); 
-
-        // Parsing the settings page if exist
-        com.mamuso.builder.readSettings(pages);
     
         // Let's loop!
-        com.mamuso.builder.buildGuide(pages);
+        com.mamuso.builder.export(currentPage);
       }
     });
 
