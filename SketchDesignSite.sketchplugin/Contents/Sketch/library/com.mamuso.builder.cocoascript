@@ -43,7 +43,7 @@ com.mamuso.builder = {
       // Try to find the text layer
       var artboardText = com.mamuso.tools.findObjectsByName(artboard.name() + "_bodytext", layers).firstObject();
       if(artboardText && artboardText.class() == "MSTextLayer"){
-        artboardHtmlText = com.mamuso.tools.markdownToHTML(artboardText.stringValue());
+        artboardHtmlText = com.mamuso.tools.markdownToHTML(artboardText.stringValue()).stringByReplacingOccurrencesOfString_withString("\n", "");
       }
 
       pageVariables.artboards.push({
@@ -90,7 +90,7 @@ com.mamuso.builder = {
   // Page Path
   // -------------------------------------------------------------------
   getYmlPath: function(path) {
-    return path.lastPathComponent().stringByReplacingOccurrencesOfString_withString(" ", "_") + ".yml";
+    return path.lastPathComponent().stringByReplacingOccurrencesOfString_withString(" ", "_") + ".md";
   },
 
   // -------------------------------------------------------------------

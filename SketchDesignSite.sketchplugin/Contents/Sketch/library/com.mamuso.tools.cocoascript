@@ -152,7 +152,9 @@ com.mamuso.tools = {
     var filePath = file.stringByReplacingOccurrencesOfString_withString(com.mamuso.config.dropboxConfigPath, "")
 
     for(i=0; i<revisions.count(); i++) {
-      versions.push("      - " + com.mamuso.config.previewPath +  revisions[i] + filePath + "\n");
+      if(revisions[i] != "") {
+        versions.push("      - " + com.mamuso.config.previewPath +  revisions[i] + filePath + "\n");
+      }
     }    
     return versions;
   },
