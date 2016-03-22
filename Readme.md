@@ -1,1 +1,1 @@
-# Export design project to the Yammer Site
+# Export design projects to a Jelkyll site

@@ -3,7 +3,7 @@ com.mamuso = com.mamuso ? com.mamuso : {};
 
 com.mamuso.builder = {
   // -------------------------------------------------------------------
-  // Export images and ymls
+  // Export images and mds
   // -------------------------------------------------------------------
   export: function(page) {
 
@@ -57,47 +57,23 @@ com.mamuso.builder = {
     }
 
     // Let's writhe the yml :)
-    var pageTemplatePath = com.mamuso.config.templatePath.stringByAppendingPathComponent("Yml.mustache");
-    var ymlName = com.mamuso.builder.getYmlPath(com.mamuso.config.basePath);
+    var pageTemplatePath = com.mamuso.config.templatePath.stringByAppendingPathComponent("Project.mustache");
+    var ymlName = com.mamuso.builder.getMdPath(com.mamuso.config.basePath);
     var mustacheTemplate = [GRMustacheTemplate templateFromContentsOfFile:pageTemplatePath error:null];
     var mustacheTemplateContent = [mustacheTemplate renderObject:pageVariables error:null];
           
     mustacheTemplateContent.writeToFile_atomically_encoding_error(com.mamuso.config.basePath.stringByAppendingPathComponent(ymlName), true, NSUTF8StringEncoding, null);
 
-    // Set the index Page
-    // com.mamuso.builder.setIndex();
-
     // Push it!
-    // com.mamuso.tools.gitPush();
+    com.mamuso.tools.gitPush();
 
-  },
-
-  // -------------------------------------------------------------------
-  // Set index.html file
-  // -------------------------------------------------------------------
-  setIndex: function() {
-    var pageVariables = {
-      page: com.mamuso.config.firstPage
-    };
-    var indexTemplatePath = com.mamuso.config.templatePath.stringByAppendingPathComponent("Index.mustache");
-    var mustacheTemplate = [GRMustacheTemplate templateFromContentsOfFile:indexTemplatePath error:null];
-    var mustacheTemplateContent = [mustacheTemplate renderObject:pageVariables error:null];
-
-    mustacheTemplateContent.writeToFile_atomically_encoding_error(com.mamuso.config.basePath.stringByAppendingPathComponent("index.html"), true, NSUTF8StringEncoding, null);
   },
 
   // -------------------------------------------------------------------
   // Page Path
   // -------------------------------------------------------------------
-  getYmlPath: function(path) {
+  getMdPath: function(path) {
     return path.lastPathComponent().stringByReplacingOccurrencesOfString_withString(" ", "_") + ".md";
-  },
-
-  // -------------------------------------------------------------------
-  // Page Path
-  // -------------------------------------------------------------------
-  getPagePath: function(pageName) {
-    return pageName.stringByReplacingOccurrencesOfString_withString(" ", "_") + ".html";
   },
 
   // -------------------------------------------------------------------
