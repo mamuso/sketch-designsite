@@ -149,11 +149,10 @@ com.mamuso.tools = {
     var command = NSString.stringWithFormat_("\\cd \"%@\" && \\git log --pretty=format:\'%%H\' \"%@\"", com.mamuso.config.dropboxConfigPath, file);
     var stdout = com.mamuso.tools.exec(command);
     var revisions = stdout.componentsSeparatedByString(@"\n");
-    var filePath = file.stringByReplacingOccurrencesOfString_withString(com.mamuso.config.dropboxConfigPath, "")
 
     for(i=0; i<revisions.count(); i++) {
       if(revisions[i] != "") {
-        versions.push("      - " + com.mamuso.config.previewPath +  revisions[i] + filePath + "\n");
+        versions.push("      - " +  revisions[i] + "\n");
       }
     }    
     return versions;

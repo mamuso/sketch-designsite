@@ -3,6 +3,5 @@ com.mamuso = com.mamuso ? com.mamuso : {};
 
 com.mamuso.config = {
   dropboxPath: "DesignSite",
-  previewPath: "https://github.int.yammer.com/raw/mmuno/design-site-hackday/",
   scale: "2.0",             // Scale of the images we are going to export
 };
