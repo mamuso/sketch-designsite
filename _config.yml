@@ -1,0 +1,12 @@
+title: Design Site
+layouts_dir:  ./_jekyll/_layouts
+includes_dir: ./_jekyll/_includes
+exclude: ['LICENSE', 'README.md', 'Gemfile.lock', 'Gemfile', './_resources']
+
+baseurl: "/pages/mamuso/sketch-designsite"
+repository: https://github.com/mamuso/sketch-designsite
+
+markdown: kramdown
+gems:
+- jemoji
+

@@ -8,7 +8,7 @@ com.mamuso.builder = {
   export: function(page) {
 
     // Pull before start
-    com.mamuso.tools.gitPull();
+    // com.mamuso.tools.gitPull();
 
     // Clean folders
     com.mamuso.tools.cleanFolder(com.mamuso.config.basePath);

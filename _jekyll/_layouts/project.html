@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+{% include head.html %}
+
+<body>
+
+  {% include header.html %}
+
+  <div class="page-content page-collection">
+    <div class="wrapper">
+      <div class="inner-wrapper">
+
+        {% assign verifycontent = content | strip_newlines %}
+        {% unless verifycontent == ""  %}<div class="content">{{ content }}</div>{% endunless %}
+
+
+        {% if page.artboards %}
+        <ul class="image-list">
+          {% for artboard in page.artboards %}
+           <li>
+            <a href="{{ page.url  | prepend: site.baseurl }}">
+            <span class="imagepreview"><img src="{{ page.title }}/{{ artboard.image }}" class="retina-img"/></span>
+            {{ artboard.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+  {% include footer.html %}
+
+</body>
+
+</html>

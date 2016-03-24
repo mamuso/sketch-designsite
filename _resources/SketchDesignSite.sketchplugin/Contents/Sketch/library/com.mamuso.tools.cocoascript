@@ -49,7 +49,7 @@ com.mamuso.tools = {
     var dropboxConfig = JSON.parse(NSString.stringWithContentsOfFile(NSHomeDirectory().stringByAppendingPathComponent('.dropbox/info.json')));
     if(dropboxConfig.business.path && dropboxConfig.business.is_team == 1){
       com.mamuso.config.dropboxConfigPath = NSString.stringWithFormat("%@", dropboxConfig.business.path).stringByAppendingPathComponent(com.mamuso.config.dropboxPath);
-      com.mamuso.config.dropboxProjectsPath = NSURL.fileURLWithPath(NSString.stringWithFormat("%@", dropboxConfig.business.path).stringByAppendingPathComponent(com.mamuso.config.dropboxPath).stringByAppendingPathComponent("Projects"));
+      com.mamuso.config.dropboxProjectsPath = NSURL.fileURLWithPath(NSString.stringWithFormat("%@", dropboxConfig.business.path).stringByAppendingPathComponent(com.mamuso.config.dropboxPath).stringByAppendingPathComponent("projects"));
       var panel = [NSOpenPanel openPanel];
       [panel setMessage:"🎟 Choose an existing project or create a new folder"];
       [panel setCanChooseDirectories: true];
@@ -58,7 +58,16 @@ com.mamuso.tools = {
       [panel setDirectoryURL:com.mamuso.config.dropboxProjectsPath];
       if ([panel runModal] == NSOKButton) {
         var message = [panel filename];
-        return message;
+        if(message == com.mamuso.config.dropboxConfigPath + "/projects"){
+          var alert = NSAlert.alloc().init();
+          alert.setMessageText("NOT HERE! 🙅");
+          alert.addButtonWithTitle('OK');
+          alert.setInformativeText("Make a new folder for your designs or pick an existing one.")
+          alert.runModal();          
+          return null;
+        } else {
+          return message;
+        }
       } else {
         return null;
       }
