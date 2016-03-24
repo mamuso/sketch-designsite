@@ -65,7 +65,7 @@ com.mamuso.builder = {
     mustacheTemplateContent.writeToFile_atomically_encoding_error(com.mamuso.config.basePath.stringByAppendingPathComponent(ymlName), true, NSUTF8StringEncoding, null);
 
     // Push it!
-    com.mamuso.tools.gitPush();
+    // com.mamuso.tools.gitPush();
 
   },
 
@@ -80,7 +80,8 @@ com.mamuso.builder = {
   // Artboard ID
   // -------------------------------------------------------------------
   getArtboardId: function(pageName, artboardName) {
-    return pageName.stringByReplacingOccurrencesOfString_withString(" ", "_").lowercaseString() + "-" + artboardName.stringByReplacingOccurrencesOfString_withString(" ", "_").lowercaseString();
+    // return pageName.stringByReplacingOccurrencesOfString_withString(" ", "_").lowercaseString() + "-" + artboardName.stringByReplacingOccurrencesOfString_withString(" ", "_").lowercaseString();
+    return artboardName.stringByReplacingOccurrencesOfString_withString(" ", "_").lowercaseString();
   }
 
 };

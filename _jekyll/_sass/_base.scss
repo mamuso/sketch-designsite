@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'montserrat';
+    src: url('fonts/montserrat-light-webfont.eot');
+    src: url('fonts/montserrat-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/montserrat-light-webfont.woff2') format('woff2'),
+         url('fonts/montserrat-light-webfont.woff') format('woff'),
+         url('fonts/montserrat-light-webfont.ttf') format('truetype'),
+         url('fonts/montserrat-light-webfont.svg#montserratlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('fonts/montserrat-regular-webfont.eot');
+    src: url('fonts/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/montserrat-regular-webfont.woff2') format('woff2'),
+         url('fonts/montserrat-regular-webfont.woff') format('woff'),
+         url('fonts/montserrat-regular-webfont.ttf') format('truetype'),
+         url('fonts/montserrat-regular-webfont.svg#montserratregular') format('svg');
+    font-weight: bold;
+    font-style: bold;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-weight: 300;
+    background-color: $bg;
+    -webkit-text-size-adjust: 100%;
+}
+
+a {
+  color: #386CBB;
+}
+
+.site-header {
+  background: #FFFFFF;
+  padding: 22px 40px 20px;
+  img {
+    vertical-align: -6px;
+    margin-right: 12px;
+  }
+  a {
+    font-family: 'Montserrat', sans-serif;
+    margin-right: 8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #555555;
+    font-weight: bold;
+  }
+}
+
+.content {
+  max-width: 850px;
+  padding: 20px 40px 20px 80px;
+}
+
+.image-list {
+  list-style: none;
+  padding-left: 80px;
+  li {
+    display: inline-block;
+    vertical-align: top;
+    width: 300px;
+    margin: 0 24px 48px 0;
+    overflow: hidden;
+    list-style: none;
+  }
+  .imagepreview {
+    background-size: cover;
+    background-position: top center;
+    display: block;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .contentpreview {
+    padding: 16px 0 12px;
+    font-size: $small-font-size;
+    color: #555555;
+    .previewtitle {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: -4px;
+      font-size: $base-font-size;
+    }
+  }
+}

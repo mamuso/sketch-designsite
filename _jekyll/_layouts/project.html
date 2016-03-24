@@ -12,17 +12,22 @@
       <div class="inner-wrapper">
 
         {% assign verifycontent = content | strip_newlines %}
-        {% unless verifycontent == ""  %}<div class="content">{{ content }}</div>{% endunless %}
-
+          {% unless verifycontent == ""  %}
+          <div class="content">
+            {{ content }}
+          </div>
+          {% endunless %}
 
         {% if page.artboards %}
         <ul class="image-list">
           {% for artboard in page.artboards %}
            <li>
-            <a href="{{ page.url  | prepend: site.baseurl }}">
-            <span class="imagepreview"><img src="{{ page.title }}/{{ artboard.image }}" class="retina-img"/></span>
-            {{ artboard.title }}
-            </a>
+            <a href="{{ page.url  | prepend: site.baseurl }}"></a>
+            <span class="imagepreview" style="background-image: url('{{ page.title }}/{{ artboard.image }}');"><!--img src="" class="retina-img"/--></span>
+            <div class="contentpreview">
+                <strong class="previewtitle">{{ artboard.title }}</strong>
+                {{ artboard.text }}
+            </div>
           </li>
           {% endfor %}
         </ul>

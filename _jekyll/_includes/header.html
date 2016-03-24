@@ -1,12 +1,9 @@
 <header class="site-header">
 
   <div class="wrapper">
-    <a class="site-title" href="{{ site.baseurl }}/"><img src="{{ site.logourl | prepend: site.baseurl }}" width="50"></a>
-    <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
-    {% if page.collection %}
-      <a class="page-link" href="{{site.baseurl}}/{{page.collection}}/index">{{ site.collections.[page.collection].initiative }} – {{ site.collections.[page.collection].name }}</a>
-    {% endif %}
-    {% if page.title and page.noindex != true %}
+    <a class="site-title" href="{{ site.baseurl }}/"><img src="{{ site.logourl | prepend: site.baseurl }}" width="16"></a>
+    <!--a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a-->
+    {% if page.title %}
       <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
     {% endif %}
   </div>
