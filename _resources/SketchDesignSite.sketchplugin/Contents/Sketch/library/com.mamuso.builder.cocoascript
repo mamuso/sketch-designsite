@@ -8,7 +8,7 @@ com.mamuso.builder = {
   export: function(page) {
 
     // Pull before start
-    // com.mamuso.tools.gitPull();
+    com.mamuso.tools.gitPull();
 
     // Clean folders
     com.mamuso.tools.cleanFolder(com.mamuso.config.basePath);
@@ -65,7 +65,7 @@ com.mamuso.builder = {
     mustacheTemplateContent.writeToFile_atomically_encoding_error(com.mamuso.config.basePath.stringByAppendingPathComponent(ymlName), true, NSUTF8StringEncoding, null);
 
     // Push it!
-    // com.mamuso.tools.gitPush();
+    com.mamuso.tools.gitPush();
 
   },
 
