@@ -69,19 +69,29 @@
   <script type="text/javascript">
     var overlys = document.getElementsByClassName('overlay');
     var coverlinks = document.getElementsByClassName('coverlink');
+    var ov = {
+      open: function(obj) {
+        document.getElementById(obj.dataset.img).classList.remove('hide');
+        document.body.classList.add('block');
+      }, 
+      close: function() {
+        document.body.classList.remove('block');
+        for(var i = 0; i < overlys.length; i++){
+          overlys[i].classList.add('hide');
+        }
+      }
+    }
 
     for(var i = 0; i < coverlinks.length; i++){
-      console.log(coverlinks[i])
       coverlinks[i].onclick = function() {
-        document.getElementById(this.dataset.img).classList.remove('hide');
+        ov.open(this);
         return false;
       }
     }
+
     // Close Overlay
     Mousetrap.bind('esc', function() { 
-      for(var i = 0; i < overlys.length; i++){
-        overlys[i].classList.add('hide');
-      }
+      ov.close();
     }, 'keyup');
    Mousetrap.bind('x', function() { highlight(3); }, 'keyup');
   </script>
