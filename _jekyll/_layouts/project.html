@@ -4,7 +4,6 @@
 {% include head.html %}
 
 <body>
-
   {% include header.html %}
 
   <div class="page-content page-collection">
@@ -22,7 +21,7 @@
         <ul class="image-list">
           {% for artboard in page.artboards %}
            <li>
-            <a href="{{ page.url  | prepend: site.baseurl }}"></a>
+            <a href="{{ page.title }}/{{ artboard.image }}" class="coverlink" data-img="{{ artboard.id }}"></a>
             <span class="imagepreview" style="background-image: url('{{ page.title }}/{{ artboard.image }}');"><!--img src="" class="retina-img"/--></span>
             <div class="contentpreview">
                 <strong class="previewtitle">{{ artboard.title }}</strong>
@@ -31,6 +30,34 @@
           </li>
           {% endfor %}
         </ul>
+
+        {% for artboard in page.artboards %}
+          <div class="overlay hide" id="{{artboard.id}}">
+            <div class="imgvisor">
+              <img src="{{ page.title }}/{{ artboard.image }}" class="retina-img">
+            </div>
+            <div id="embedded-feed-{{artboard.id}}" class="embedded-feed hide"></div>
+            <script>
+              yam.connect.embedFeed({
+                container: '#embedded-feed-{{artboard.id}}',
+                network: 'microsoft.com',
+                feedType: 'open-graph',
+                feedId: '',
+                objectProperties: { 
+                  url: 'http://127.0.0.1:4000/pages/mamuso/sketch-designsite/projects/Test%20Site.html',
+                  type: 'page'
+                },
+                config: {
+                  header: false,
+                  footer: false,
+                  promptText: "Comment on this design",
+                  defaultGroupId: 7708114
+                }
+              });
+            </script>
+          </div>
+        {% endfor %}
+
         {% endif %}
 
       </div>
@@ -39,6 +66,25 @@
 
   {% include footer.html %}
 
-</body>
+  <script type="text/javascript">
+    var overlys = document.getElementsByClassName('overlay');
+    var coverlinks = document.getElementsByClassName('coverlink');
 
+    for(var i = 0; i < coverlinks.length; i++){
+      console.log(coverlinks[i])
+      coverlinks[i].onclick = function() {
+        document.getElementById(this.dataset.img).classList.remove('hide');
+        return false;
+      }
+    }
+    // Close Overlay
+    Mousetrap.bind('esc', function() { 
+      for(var i = 0; i < overlys.length; i++){
+        overlys[i].classList.add('hide');
+      }
+    }, 'keyup');
+   Mousetrap.bind('x', function() { highlight(3); }, 'keyup');
+  </script>
+
+</body>
 </html>
