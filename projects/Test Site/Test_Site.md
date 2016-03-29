@@ -1,7 +1,7 @@
 ---
 layout: project
 title: Test Site
-permalink: /Test_Site.md
+permalink: /test_site.html
 
 artboards:
   - id: a_cloud_and_a_sun
