@@ -1,13 +1,14 @@
 ---
 layout: project
 title: Test Site
-permalink: /:path:output_ext
+permalink: /Test_Site.md
 
 artboards:
   - id: a_cloud_and_a_sun
     title: A cloud and a sun
     text: '<p>With the ability to do more, courtesy of the messaging platform whose services bots are built on, bots will go from being utilities to powering real work.</p>'
     versions: 
+      - c81d3cd7bd05cdc0ff81e32fcf93cecffc98b622
       - 93cb851c680df4fb53c8dfe21131a1248d0fb339
       - 662f99881b8d72db94f3bb43ecfe655801884197
       - c4c846fe057cf5f6fe31b1711b78accb44be6e9c
